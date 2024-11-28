@@ -1,14 +1,17 @@
 # Quality Engineering Training Repository
 
 ## Training Period
+
 **Duration:** 21 October 2023 - 23 December 2023
 
 ## Repository Overview
+
 This repository documents my comprehensive Quality Engineering training, focusing on test automation, API testing, and various testing frameworks.
 
 ## Tech Stack
+
 - **Automation Tools:** Selenium WebDriver
-- **Testing Frameworks:** 
+- **Testing Frameworks:**
   - TestNG
   - JUnit
 - **API Testing:** Postman
@@ -17,6 +20,7 @@ This repository documents my comprehensive Quality Engineering training, focusin
 ## Progress Tracking
 
 ### Completed Modules
+
 - [x] Selenium WebDriver Basics
 - [x] Initial TestNG Configuration
 - [ ] Advanced TestNG Features
@@ -25,15 +29,18 @@ This repository documents my comprehensive Quality Engineering training, focusin
 - [ ] API Testing with Postman
 
 ### Current Focus
+
 - Deepening Selenium automation skills
 - Expanding TestNG test suite
 
 ## Key Learnings
+
 - Web element interaction techniques
 - Test case design principles
 - Basic test automation strategies
 
 ## Repository Structure
+
 ```
 quality-engineering-training/
 │
@@ -49,6 +56,7 @@ quality-engineering-training/
 ```
 
 ## Future Roadmap
+
 - Complete comprehensive test suites
 - Implement advanced Selenium techniques
 - Develop robust API test scenarios
