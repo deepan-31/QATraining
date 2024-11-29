@@ -45,12 +45,8 @@ This repository documents my comprehensive Quality Engineering training, focusin
 quality-engineering-training/
 │
 ├── selenium-scripts/
-│   ├── basic_interactions/
-│   └── advanced_scenarios/
-│
+│  
 ├── testng-tests/
-│   ├── unit_tests/
-│   └── integration_tests/
 │
 └── README.md
 ```
@@ -61,4 +57,4 @@ quality-engineering-training/
 - Implement advanced Selenium techniques
 - Develop robust API test scenarios
 
-**Last Updated:** [28-11-2024]
+**Last Updated:** [29-11-2024]
