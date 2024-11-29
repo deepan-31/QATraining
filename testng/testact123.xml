@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="testSuite">
+    <test name="FSTTests">
+        <classes>
+            <class name="TestActivity1" />
+            <class name="TestActivity2" >
+                <methods>
+                    <include name="test1ac1" />
+                    <include name="test4ac1" />
+                </methods>
+             </class>
+            <class name="TestActivity3" />
+        </classes>
+    </test>
+</suite>

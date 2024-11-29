@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="testSuite">
+    <test name="FSTTests">
+        <groups>
+            <run>
+                <include name="Header tests"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="TestActivity5" />
+        </classes>
+    </test>
+</suite>
+<!--Activity 5-->
+<!--        In testng.xml:-->
+<!--        Run all the tests from this activity.-->
+<!--        Run only the tests that are in the HeaderTests group.-->
+<!--        Run only the tests that are in the ButtonTests group.-->
+<!--        Exclude the tests that are in the HeaderTests group.-->

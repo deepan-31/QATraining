@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyFirstSuite">
+    <test thread-count="4" name="Test">
+        <classes>
+            <class name="TestNGPrograms.MyFirstTest">
+                <methods>
+                    <include name="verifyString1" />
+                    <include name="verifyVariableValue1" />
+                </methods>
+            </class>
+            <class name="TestNGPrograms.MyThirdTest">
+                <methods>
+                    <include name="verifyString3" />
+                    <include name="verifyVariableValue3" />
+                </methods>
+            </class>
+            <class name="TestNGPrograms.MySecondTest">
+                <methods>
+                    <include name="verifyString2" />
+                    <include name="verifyVariableValue2" />
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite --> 
