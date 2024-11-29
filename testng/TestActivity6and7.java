@@ -5,15 +5,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class TestActivity6 {
+public class TestActivity6and7 {
     WebDriver driver;
-//    @DataProvider(name = "Authentication")
-//    public static Object[][] credentials() {
-//        return new Object[][] {
-//                { "admin", "password" },
-//                { "testuser_2", "Test@456" }
-//        };
-//    }
+    @DataProvider(name = "Authentication")
+    public static Object[][] credentials() {
+        return new Object[][] {
+                { "admin", "password" },
+                { "testuser_2", "Test@456" }
+        };
+    }
     @BeforeClass(alwaysRun = true)
     public void beforeclass(){
         driver = new FirefoxDriver();
@@ -24,8 +24,8 @@ public class TestActivity6 {
         System.out.println(driver.getTitle());
         Assert.assertEquals(driver.getTitle(),"Login Form");
     }
-    @Test//(dataProvider = "Authentication")
-    @Parameters({ "sUsername", "sPassword" })
+    @Test(dataProvider = "Authentication")
+//    @Parameters({ "sUsername", "sPassword" })
     public void test1(String susername,String spassword){
         WebElement username = driver.findElement(By.id("username"));
         WebElement password = driver.findElement(By.id("password"));
@@ -36,6 +36,7 @@ public class TestActivity6 {
         driver.findElement(By.xpath("//*[@onclick='signIn()']")).click();
         WebElement confmsg = driver.findElement(By.id("action-confirmation"));
         Assert.assertEquals(confmsg.getText(),"Welcome Back, admin");
+        driver.navigate().refresh();
     }
 
     @AfterClass(alwaysRun = true)
