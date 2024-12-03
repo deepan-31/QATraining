@@ -25,13 +25,12 @@ This repository documents my comprehensive Quality Engineering training, focusin
 - [x] Initial TestNG Configuration
 - [x] Advanced TestNG Features
 - [ ] JUnit Implementation
-- [-] Gherkin/Cucumber Scenarios
+- [x] Gherkin/Cucumber Scenarios
 - [ ] API Testing with Postman
 
 ### Current Focus
 
-- Deepening Selenium automation skills
-- Expanding TestNG test suite
+- Deepening Cucumber automation skills
 
 ## Key Learnings
 
@@ -41,14 +40,14 @@ This repository documents my comprehensive Quality Engineering training, focusin
 
 ## Repository Structure
 
-```
+```md
 quality-engineering-training/
 │
 ├── selenium-scripts/
 │  
 ├── testng-tests/
 |
-|-- cucumber-scripts/
+├──cucumber-scripts/
 │
 └── README.md
 ```
