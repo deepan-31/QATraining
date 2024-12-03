@@ -1,0 +1,26 @@
+//For .xls files
+Workbook workbook = new Workbook();
+Sheet sheet = workbook.createSheet("Sheet Name");
+
+//For .xlsx files
+XSSFWorkbook workbook = new XSSFWorkbook();
+XSSFSheet sheet = workbook.createSheet("Sheet Name");
+
+// Iterate through each rows one by one
+for(Row cells : sheet) {
+    // For each row, iterate through all the columns
+    for(Cell cell : cells) {
+        if (cell != null) {
+            // Get data from cells
+            switch (cell.getCellType()) {
+                case STRING:
+                    System.out.println(cell.getStringCellValue()); break;
+                case NUMERIC:
+                    System.out.println(cell.getNumericCellValue()); break;
+                case BOOLEAN:
+                    System.out.println(cell.getBooleanCellValue()); break;
+            }
+        }
+    }
+}
+
