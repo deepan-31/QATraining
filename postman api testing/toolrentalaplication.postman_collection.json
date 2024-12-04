@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "5aeae984-3ccc-4abf-a8e9-d98ef20209c5",
+		"name": "toolrentalaplication",
+		"description": "[quick-introduction-to-postman/simple-tool-rental-api.md at main · vdespa/quick-introduction-to-postman · GitHub](https://github.com/vdespa/quick-introduction-to-postman/blob/main/simple-tool-rental-api.md)\n\n[https://simple-tool-rental-api.glitch.me](https://simple-tool-rental-api.glitch.me)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27121424"
+	},
+	"item": [
+		{
+			"name": "status request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is UP\",()=>{\r",
+							"    const response = pm.response.json();\r",
+							"    console.log(response);\r",
+							"    pm.expect(response.status).to.eq(\"UP\");\r",
+							"});\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"apiToken\"));\r",
+							"\r",
+							"pm.collectionVariables.set(\"firstname\",\"John\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{baseurl}}/status",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all tools",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"const tools = response.filter((tool)=>tool.inStock===true);\r",
+							"\r",
+							"// Test for successful response status\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test for response body being an array\r",
+							"pm.test(\"Response body is an array\", function () {\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"// Test for tools availability in stock\r",
+							"pm.test(\"Tools are in stock\", function () {\r",
+							"    pm.expect(tools.length).to.be.greaterThan(0);\r",
+							"});\r",
+							"\r",
+							"// Test for presence of a tool object and inStock value is true\r",
+							"pm.test(\"Tool object is present and inStock is true\", function () {\r",
+							"    if (tools.length > 0) {\r",
+							"        pm.expect(tools[0].id).to.exist;\r",
+							"    } else {\r",
+							"        pm.expect.fail(\"No tools available in stock\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"category\",tools[0].category);\r",
+							"// Test for category in the tools matching the collection variable category\r",
+							"pm.test(\"Category in the tools matches the collection variable category\", function () {\r",
+							"    pm.expect(tools[0].category).to.equal(pm.collectionVariables.get(\"category\"));\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{baseurl}}/tools?category={{category}}",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"tools"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "{{category}}",
+							"description": "Optional - Specifies the category of tools you want to be returned. It can be one of: ladders, plumbing, power-tools, trailers, electric-generators, lawn-care"
+						},
+						{
+							"key": "results",
+							"value": "a",
+							"description": "Optional - Specifies the number of results you want. Must be number between 1 and 20. By default, only 20 tools will be displayed.",
+							"disabled": true
+						},
+						{
+							"key": "available",
+							"value": "false",
+							"description": "Optional - Specifies the availability of the tools. By default, all tools will be displayed.",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single tool",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"is the category plumbing\",()=>{\r",
+							"    const response = pm.response.json();\r",
+							"    console.log(response.category);\r",
+							"    pm.expect(response.category).to.equal(\"plumbing\");\r",
+							"});\r",
+							"\r",
+							"// let response = pm.response.json();\r",
+							"// pm.globals.unset(response.id);\r",
+							"// pm.globals.set(\"toolid\",response.id);\r",
+							"\r",
+							"pm.test(\"Check if current-stock is greater than 2\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"    const toolidInCollection = pm.variables.get(\"toolid\");\r",
+							"    pm.expect(response.id).to.equal(toolidInCollection);\r",
+							"    pm.expect(response['current-stock']).to.be.above(2);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.execution.setNextRequest(\"create an order\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{baseurl}}/tools/:toolid",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"tools",
+						":toolid"
+					],
+					"query": [
+						{
+							"key": "user-manual",
+							"value": "false",
+							"description": "Optional - Returns the user manual in PDF format.",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "toolid",
+							"value": "{{toolid}}",
+							"description": "Specifies the id of the tool you wish to retrieve."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"orderid\",pm.response.json().orderId);\r",
+							"\r",
+							"console.log(pm.response.json().orderId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"toolId\":{{toolid}},\r\n    \"customerName\":\"{{$randomFullName}}\",\r\n    \"comment\":\"{{$randomAlphaNumeric}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{baseurl}}/orders",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"check the response body\",()=>{\r",
+							"    const response = pm.response.json();\r",
+							"    console.log(response.error);\r",
+							"    pm.expect(response.error).to.equal(\"API client already registered. Try a different email.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientName\":\"deepan\",\r\n    \"clientEmail\":\"example1234@example.com\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{baseurl}}/api-clients",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api-clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", ()=> {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{baseurl}}/orders",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{baseurl}}/orders/:orderid",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"orders",
+						":orderid"
+					],
+					"variable": [
+						{
+							"key": "orderid",
+							"value": "{{orderid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update an order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerName\":\"joseph\",\r\n    \"comment\":\"hi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{baseurl}}/orders/:orderid",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"orders",
+						":orderid"
+					],
+					"variable": [
+						{
+							"key": "orderid",
+							"value": "Qt7HhWwsAiBkc8CGTzVHn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete an order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{baseurl}}/orders/:orderid",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"orders",
+						":orderid"
+					],
+					"variable": [
+						{
+							"key": "orderid",
+							"value": "qx8jQ2JrlQK4u2wfg60Kf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check if order deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test case for checking the status code is 404 for unsuccessful deletion\r",
+							"// pm.test(\"Status code is 204\", function () {\r",
+							"//     pm.response.to.have.status(404);\r",
+							"// });\r",
+							"\r",
+							"// // Advanced test case for checking the response body is empty after unsuccessful deletion\r",
+							"// pm.test(\"Response body is no order\", function () {\r",
+							"//     pm.expect(pm.response.text()).to.include(`No order with id ${pm.globals.get(\"orderid\")}`);\r",
+							"// });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{baseurl}}/orders/:orderid",
+					"protocol": "https",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"orders",
+						":orderid"
+					],
+					"variable": [
+						{
+							"key": "orderid",
+							"value": "{{orderid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "simple-tool-rental-api.glitch.me",
+			"type": "default"
+		},
+		{
+			"key": "apiToken",
+			"value": "your api token",
+			"type": "string"
+		},
+		{
+			"key": "firstname",
+			"value": ""
+		},
+		{
+			"key": "category",
+			"value": ""
+		}
+	]
+}
