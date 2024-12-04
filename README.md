@@ -24,13 +24,13 @@ This repository documents my comprehensive Quality Engineering training, focusin
 - [x] Selenium WebDriver Basics
 - [x] Initial TestNG Configuration
 - [x] Advanced TestNG Features
-- [ ] JUnit Implementation
+- [x] JUnit Implementation
 - [x] Gherkin/Cucumber Scenarios
-- [ ] API Testing with Postman
+- [x] API Testing with Postman
 
 ### Current Focus
 
-- Deepening Cucumber automation skills
+- Deepening test automation skills
 
 ## Key Learnings
 
@@ -48,6 +48,8 @@ quality-engineering-training/
 ├── testng-tests/
 |
 ├──cucumber-scripts/
+│  
+├── postman api testing/
 │
 └── README.md
 ```
@@ -58,4 +60,4 @@ quality-engineering-training/
 - Implement advanced Selenium techniques
 - Develop robust API test scenarios
 
-**Last Updated:** [03-12-2024]
+**Last Updated:** [04-12-2024]
