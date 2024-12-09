@@ -14,8 +14,9 @@ This repository documents my comprehensive Quality Engineering training, focusin
 - **Testing Frameworks:**
   - TestNG
   - JUnit
-- **API Testing:** Postman
 - **BDD:** Gherkin
+- **API Testing:** Postman
+- **Performance:** Jmeter
 
 ## Progress Tracking
 
@@ -27,6 +28,7 @@ This repository documents my comprehensive Quality Engineering training, focusin
 - [x] JUnit Implementation
 - [x] Gherkin/Cucumber Scenarios
 - [x] API Testing with Postman
+- [x] Performance Testing with Jmeter
 
 ### Current Focus
 
@@ -46,10 +48,12 @@ quality-engineering-training/
 ├── selenium-scripts/
 │  
 ├── testng-tests/
-|
-├──cucumber-scripts/
+│  
+├── Cucumber scripts/
 │  
 ├── postman api testing/
+│  
+├── jmeter files/
 │
 └── README.md
 ```
@@ -60,4 +64,4 @@ quality-engineering-training/
 - Implement advanced Selenium techniques
 - Develop robust API test scenarios
 
-**Last Updated:** [04-12-2024]
+**Last Updated:** [09-12-2024]
