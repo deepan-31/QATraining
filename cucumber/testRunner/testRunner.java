@@ -8,9 +8,9 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/java/features",
         glue = {"stepDefinitions"},
-        tags = "@activity2"
+        plugin = { "pretty" ,"html:target/cucumber-output/cucumberreport.html"},
+        tags = "@activity5"
 )
-
-public class testRunner {
+public class TestRunner {
 
 }

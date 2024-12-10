@@ -54,6 +54,7 @@ public class GoogleSearchSteps {
 
     @And("^Close the browser$")
     public void closeTheBrowser() throws Throwable {
+        System.out.println("Close the browser");
         driver.close();
     }
 }
