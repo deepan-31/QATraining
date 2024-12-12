@@ -54,6 +54,8 @@ quality-engineering-training/
 ├── postman api testing/
 │  
 ├── jmeter files/
+│  
+├── ecommerce selenium activity/
 │
 └── README.md
 ```
@@ -64,4 +66,4 @@ quality-engineering-training/
 - Implement advanced Selenium techniques
 - Develop robust API test scenarios
 
-**Last Updated:** [09-12-2024]
+**Last Updated:** [12-12-2024]
